@@ -64,7 +64,7 @@ modeler-hackathon-starter/
 │   ├── requirements.txt           # Minimal deps for the quick example
 │   └── tools_guide.ipynb          # Getting started with the tools
 │
-├── data/                          # Dataset (download separately)
+├── dataset/                       # Full retail dataset (parquet/logs/pdfs)
 │   ├── parquet/                   # 24 dimension and fact tables
 │   ├── logs/                      # 19 log files (JSONL)
 │   └── pdfs/                      # Contracts, policies, invoices
@@ -97,12 +97,12 @@ pip install -r example/requirements.txt
 
 See [`example/SETUP.md`](example/SETUP.md) for detailed instructions and troubleshooting.
 
-### 2. Download the Dataset
+### 2. Inspect the Dataset
+
+The full dataset ships with this repo under `dataset/`. Take a quick look:
 
 ```bash
-# Download from the platform (500 MB compressed)
-wget https://hack.theoryvc.com/dataset.zip
-unzip dataset.zip -d data/
+ls dataset
 ```
 
 ### 3. Open the Tools Guide
@@ -173,21 +173,19 @@ print(response.choices[0].message.content)
 
 ## Submission Format
 
-Your answers go in a CSV file with this format:
+Submissions must follow the leaderboard schema:
 
 ```csv
-question_id,answer_type,answer_value,confidence,explanation
-1,customer_sk,12345,high,"Found using aggregation query"
-1,revenue,125000.50,high,"Calculated with SUM()"
-2,category,Electronics,medium,"Identified from analysis"
+index,a1,a2,a3,a4,a5
+0,9104725,TRUE,42.1875,vpm2k6zqf,Avery
 ```
 
 **Key Points:**
-- Multiple rows per question if it has multiple parts
-- `confidence`: high | medium | low
-- `explanation`: One sentence explaining your reasoning
+- `index` starts at 0 and increments with each question.
+- `a1`–`a5` correspond to the five answer slots per question (numeric, boolean, float, string, string).
+- Fill unused slots with an empty string if a question requires fewer answers.
 
-See `sample_submission.csv` for the template.
+See `sample_submission.csv` for the up-to-date template.
 
 ---
 
@@ -217,7 +215,6 @@ See `sample_submission.csv` for the template.
 - **Competition Platform:** [hack.theoryvc.com](https://hack.theoryvc.com)
 - **OpenRouter (AI Models):** [openrouter.ai](https://openrouter.ai)
 - **This Repo:** [github.com/TheoryVentures/modeler-hackathon-starter](https://github.com/TheoryVentures/modeler-hackathon-starter)
-- **Dataset Source:** [github.com/TheoryVentures/Retail-Universe](https://github.com/TheoryVentures/Retail-Universe)
 
 ---
 

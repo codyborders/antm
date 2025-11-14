@@ -29,12 +29,19 @@ source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-4. (Optional) Register the environment as a Jupyter kernel:
+4. (Optional) Inspect the dataset (already included at `dataset/` in the repo root):
+```bash
+cd ..
+ls dataset
+cd example
+```
+
+5. (Optional) Register the environment as a Jupyter kernel:
 ```bash
 python -m ipykernel install --user --name "modeler-starter" --display-name "Python 3 (Modeler Starter)"
 ```
 
-5. Launch the notebook:
+6. Launch the notebook:
 ```bash
 jupyter notebook tools_guide.ipynb
 ```

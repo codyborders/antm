@@ -252,22 +252,6 @@ See `sample_submission.csv` for the up-to-date template.
 
 ---
 
-## Final Checklist
-
-Before Round 2:
-- [ ] Completed at least 10 training questions
-- [ ] Understand DuckDB basics
-- [ ] Can parse logs with LanceDB or pandas
-- [ ] Know how to fill out submission CSV
-- [ ] Have your approach ready to test
-
-During Round 2:
-- [ ] Answer as many of 30 questions as possible
-- [ ] Fill out `sample_submission.csv`
-- [ ] Upload to platform before 6:00 PM
-
----
-
 **May the best approach win.**
 
 ---

@@ -58,8 +58,11 @@ You'll work with:
 ```
 modeler-hackathon-starter/
 ├── README.md                      # This file
-├── tools_guide.ipynb              # Getting started with the tools
 ├── sample_submission.csv          # Template for your answers
+├── example/                       # Self-contained setup + notebook
+│   ├── SETUP.md                   # Detailed installation instructions
+│   ├── requirements.txt           # Minimal deps for the quick example
+│   └── tools_guide.ipynb          # Getting started with the tools
 │
 ├── data/                          # Dataset (download separately)
 │   ├── parquet/                   # 24 dimension and fact tables
@@ -83,16 +86,16 @@ modeler-hackathon-starter/
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-pip install -r requirements.txt
+pip install -r example/requirements.txt
 python -m ipykernel install --user --name "modeler-starter" --display-name "Python 3 (Modeler Starter)"
 ```
 
 **Alternative:** System-wide installation (may fail on macOS):
 ```bash
-pip install -r requirements.txt
+pip install -r example/requirements.txt
 ```
 
-See [SETUP.md](SETUP.md) for detailed instructions and troubleshooting.
+See [`example/SETUP.md`](example/SETUP.md) for detailed instructions and troubleshooting.
 
 ### 2. Download the Dataset
 
@@ -105,7 +108,7 @@ unzip dataset.zip -d data/
 ### 3. Open the Tools Guide
 
 ```bash
-jupyter notebook tools_guide.ipynb
+jupyter notebook example/tools_guide.ipynb
 ```
 
 This notebook demonstrates:
@@ -228,15 +231,13 @@ See `sample_submission.csv` for the template.
 ---
 
 ## Timeline
-
-**11:00 AM** - Doors open  
-**11:30 AM** - Kickoff  
-**12:00 PM** - Setup time  
-**12:30 PM** - Round 1: Training (25 questions with answers)  
-**2:00 PM** - Round 2: Test (30 questions, no answers)  
-**6:00 PM** - Submissions due  
-**6:00-7:30 PM** - Judging (Round 3: Holdout)  
-**7:30 PM** - Winners announced  
+ 
+**10:00 AM – 11:00 AM** - Check-In / Coffee & Breakfast  
+**11:00 AM – 12:30 PM** - Opening Remarks & Interviews  
+**12:30 PM** - Hacking Begins  
+**1:00 PM** - Lunch  
+**6:30 PM – 7:00 PM** - Winner Interviews  
+**7:00 PM – 8:00 PM** - Dinner & Closing Remarks  
 
 ---
 

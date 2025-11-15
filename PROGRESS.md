@@ -1,1 +1,2 @@
 2025-11-15 12:55 PST - Authored a comprehensive Mermaid ER diagram (diagrams/antm_erd.mmd) plus rendered PDF covering all 33 retail + log tables, and set up a local mermaid-cli toolchain for reproducible diagram builds.
+2025-11-15 13:45 PST - Answered the full set of training questions by querying MotherDuck (store/web/catalog fact tables + logs), summarized each result in training-answers.md, and prepped for documentation updates/commit.

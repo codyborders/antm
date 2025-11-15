@@ -48,6 +48,11 @@ FROM dec_revenue;
 
 From there the rest of the calculations were straightforward ratio math, and I wrapped up by logging progress + preparing for the next batch of validation tasks.
 
+## 2025-11-15 – Surfacing Reference PDFs
+Quick follow-up request: catalog any PDFs already living in the workspace and stage one for easy download. I let `rg --files -g '*.pdf'` walk the tree so I didn’t miss non-obvious locations (ERD exports, annual reports, etc.). That surfaced both the diagrams and the /dataset/annual_reports trove, so I grabbed the FY2022 annual report as the cleanest candidate.
+
+Copied that file straight into the repo root to keep the path simple for the requester. No data movement outside the sandbox, just a `cp dataset/annual_reports/pdf/AnnualReport_FY2022.pdf ./` invocation, and then I logged the action so we remember why a large PDF suddenly appeared at top-level.
+
 ## 2025-11-15 – Breaking the Diagram into Slices
 After trying to read the all-in-one ERD in reviews, I decomposed it into four Mermaid specs/PDFs: a high-level bridge view, a retail core star schema, all experimentation/logs, and the DuckDB metadata tables. That separation mirrors how analysts actually attack questions—fact hunters stay inside their slice, and only hop to another chart when bridging dimensions like `customer_sk`.
 

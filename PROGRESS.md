@@ -1,3 +1,4 @@
 2025-11-15 12:55 PST - Authored a comprehensive Mermaid ER diagram (diagrams/antm_erd.mmd) plus rendered PDF covering all 33 retail + log tables, and set up a local mermaid-cli toolchain for reproducible diagram builds.
 2025-11-15 13:45 PST - Answered the full set of training questions by querying MotherDuck (store/web/catalog fact tables + logs), summarized each result in training-answers.md, and prepped for documentation updates/commit.
+2025-11-15 14:05 PST - Used ripgrep to inventory existing PDFs (diagrams + annual reports) and copied AnnualReport_FY2022.pdf into the repo root per request.
 2025-11-15 13:26 PST - Split the monolithic ERD into overview, retail-core, experiments/logs, and metadata Mermaid specs with matching PDFs plus a diagrams README describing how to rebuild each slice.

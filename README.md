@@ -28,21 +28,26 @@ You'll work with:
 
 ### Three Rounds
 
-**Round 1: Training Round** (12:30 PM - 2:00 PM)
+**Training Round** (12:30 PM - 3:00 PM)
 - 25 questions with answers provided
 - Practice understanding the dataset
 - Test your approach
 - No submission required
 
-**Round 2: Test Round** (2:00 PM - 5:00 PM)
+**Round 1** (3:00 PM - 4:15 PM)
 - 30 questions without answers
 - Submit your answers via the platform
 - Real-time leaderboard
-- This is the main competition
 
-**Round 3: Holdout Evaluation** (After 6:00 PM)
-- 20 secret questions run against your system
-- Prevents overfitting
+**Round 2** (4:15 PM - 5:30 PM)
+- 30 questions without answers
+- Submit your answers via the platform
+- Real-time leaderboard
+
+**Round 3** (5:30 PM - 6:00 PM)
+- 20 questions without answers
+- Submit your answers via the platform
+- Real-time leaderboard
 - Determines final rankings
 - Winners announced at 7:30 PM
 
@@ -58,13 +63,14 @@ You'll work with:
 ```
 modeler-hackathon-starter/
 ├── README.md                      # This file
+├── download_dataset.sh            # Script to download dataset (RUN THIS FIRST!)
 ├── sample_submission.csv          # Template for your answers
 ├── example/                       # Self-contained setup + notebook
 │   ├── SETUP.md                   # Detailed installation instructions
 │   ├── requirements.txt           # Minimal deps for the quick example
 │   └── tools_guide.ipynb          # Getting started with the tools
 │
-├── dataset/                       # Full retail dataset (parquet/logs/pdfs)
+├── dataset/                       # Downloaded dataset (created by script)
 │   ├── parquet/                   # 24 dimension and fact tables
 │   ├── logs/                      # 19 log files (JSONL)
 │   └── pdfs/                      # Contracts, policies, invoices
@@ -79,35 +85,33 @@ modeler-hackathon-starter/
 
 ## Quick Start
 
-### 1. Install Dependencies
+### 1. Download the Dataset (REQUIRED FIRST STEP)
 
-**Recommended:** Use a virtual environment to avoid common issues (especially on macOS):
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-pip install -r example/requirements.txt
-python -m ipykernel install --user --name "modeler-starter" --display-name "Python 3 (Modeler Starter)"
-```
-
-**Alternative:** System-wide installation (may fail on macOS):
-```bash
-pip install -r example/requirements.txt
-```
-
-See [`example/SETUP.md`](example/SETUP.md) for detailed instructions and troubleshooting.
-
-### 2. Inspect the Dataset
-
-All required files ship inside this repo under `dataset/`:
+**Run this script to download the complete dataset from Cloud Storage:**
 
 ```bash
-ls dataset
+./download_dataset.sh
 ```
 
-You'll use these Parquet tables, logs, and PDFs directly in the notebook—no extra generation steps needed.
+This script will:
+- Create a Python virtual environment
+- Install required packages (`google-cloud-storage`)
+- Download all dataset files to `./dataset/`
+- Takes ~2-5 minutes depending on your connection
 
-### 3. Open the Tools Guide
+**The dataset is NOT included in this Git repository.** You must run this script before proceeding.
+
+### 2. Verify the Dataset
+
+Check that the dataset downloaded correctly:
+
+```bash
+ls dataset/
+```
+
+You should see parquet files, logs, and PDFs
+
+### 3. (Optional) Open the Tools Guide
 
 ```bash
 jupyter notebook example/tools_guide.ipynb
@@ -210,42 +214,12 @@ See `sample_submission.csv` for the up-to-date template.
 
 ---
 
-## Strategy Tips
-
-### Recommendations
-- Start with training evals - they include answers
-- Use the tools notebook to learn DuckDB and LanceDB
-- Explore different approaches and find what works
-- Test your system on various question types
-
-### Common Pitfalls
-- Hardcoding answers (holdout eval will catch this)
-- Skipping logs/PDFs (many questions require them)
-- Waiting until the last minute
-
-### Time Management
-- **12:30-1:30 PM:** Training round - explore the data
-- **1:30-2:30 PM:** Build your approach/system
-- **2:30-5:00 PM:** Answer test questions
-- **5:00-6:00 PM:** Final checks and submit
-
----
-
 ## Important Links
 
 - **Competition Platform:** [hack.theoryvc.com](https://hack.theoryvc.com)
 - **OpenRouter (AI Models):** [openrouter.ai](https://openrouter.ai)
 - **MCP Server:** [fastmcp.cloud/app/antm-hack-example](https://fastmcp.cloud/app/antm-hack-example) | [Source Code](https://github.com/tdoehmen/mcp-server-motherduck-example)
 - **This Repo:** [github.com/TheoryVentures/modeler-hackathon-starter](https://github.com/TheoryVentures/modeler-hackathon-starter)
-
----
-
-## Getting Help
-
-**During the Event:**
-- Technical issues: Ask event staff
-- Data questions: Check `data/README.md`
-- Platform issues: Contact judges
 
 ---
 

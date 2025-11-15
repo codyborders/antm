@@ -142,6 +142,25 @@ response = client.chat.completions.create(
 
 print(response.choices[0].message.content)
 ```
+
+### 5. (Optional) Use the MCP Server
+
+Contestants have access to a pre-configured **MCP (Model Context Protocol) server** that provides direct access to the hackathon dataset via MotherDuck. This allows you to integrate the dataset directly into AI assistants (Claude, ChatGPT, etc.) or custom agents.
+
+**MCP Server URL:** `https://antm-hack-example.fastmcp.app/mcp`
+
+**Quick Setup:** Visit [https://antm-hack-example.fastmcp.app](https://antm-hack-example.fastmcp.app) for easy integration with OpenAI SDK, Codex CLI, Claude Desktop, Claude Code, Cursor, or Gemini CLI.
+
+**Connectors:** If you visit the base URL (`https://antm-hack-example.fastmcp.app`) without the `/mcp` path, you'll see a list of connectors to make it easy to add the server to your custom agents or chat clients.
+
+**Source Code:** The MCP server source code is available at [github.com/tdoehmen/mcp-server-motherduck-example](https://github.com/tdoehmen/mcp-server-motherduck-example) if you want to deploy your own instance or understand how it works.
+
+**Features:**
+- Execute SQL queries on the hackathon dataset
+- List all tables in the database
+- Access DuckDB SQL syntax reference
+- Read-only access with query timeouts and result limits
+
 ---
 
 ## Understanding the Data
@@ -216,6 +235,7 @@ See `sample_submission.csv` for the up-to-date template.
 
 - **Competition Platform:** [hack.theoryvc.com](https://hack.theoryvc.com)
 - **OpenRouter (AI Models):** [openrouter.ai](https://openrouter.ai)
+- **MCP Server:** [fastmcp.cloud/app/antm-hack-example](https://fastmcp.cloud/app/antm-hack-example) | [Source Code](https://github.com/tdoehmen/mcp-server-motherduck-example)
 - **This Repo:** [github.com/TheoryVentures/modeler-hackathon-starter](https://github.com/TheoryVentures/modeler-hackathon-starter)
 
 ---

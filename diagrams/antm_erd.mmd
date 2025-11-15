@@ -1,0 +1,370 @@
+erDiagram
+    MAIN_CUSTOMER {
+        BIGINT c_customer_sk PK
+        VARCHAR c_customer_id
+        BIGINT c_current_cdemo_sk
+        BIGINT c_current_hdemo_sk
+        BIGINT c_current_addr_sk
+        BIGINT c_first_shipto_date_sk
+        BIGINT c_first_sales_date_sk
+    }
+    MAIN_CUSTOMER_ADDRESS {
+        BIGINT ca_address_sk PK
+        VARCHAR ca_address_id
+        VARCHAR ca_city
+        VARCHAR ca_state
+        VARCHAR ca_country
+    }
+    MAIN_CUSTOMER_DEMOGRAPHICS {
+        BIGINT cd_demo_sk PK
+        VARCHAR cd_gender
+        VARCHAR cd_marital_status
+        BIGINT cd_purchase_estimate
+    }
+    MAIN_HOUSEHOLD_DEMOGRAPHICS {
+        BIGINT hd_demo_sk PK
+        BIGINT hd_income_band_sk
+        VARCHAR hd_buy_potential
+    }
+    MAIN_INCOME_BAND {
+        BIGINT ib_income_band_sk PK
+        BIGINT ib_lower_bound
+        BIGINT ib_upper_bound
+    }
+    MAIN_DATE_DIM {
+        BIGINT d_date_sk PK
+        DATE d_date
+        BIGINT d_year
+        BIGINT d_moy
+    }
+    MAIN_ITEM {
+        BIGINT i_item_sk PK
+        VARCHAR i_item_id
+        VARCHAR i_item_desc
+        DOUBLE i_current_price
+        BIGINT i_category_id
+    }
+    MAIN_PROMOTION {
+        BIGINT p_promo_sk PK
+        VARCHAR p_promo_id
+        BIGINT p_start_date_sk
+        BIGINT p_end_date_sk
+        BIGINT p_item_sk
+    }
+    MAIN_STORE {
+        BIGINT s_store_sk PK
+        VARCHAR s_store_id
+        VARCHAR s_store_name
+        BIGINT s_market_id
+    }
+    MAIN_WAREHOUSE {
+        BIGINT w_warehouse_sk PK
+        VARCHAR w_warehouse_id
+        VARCHAR w_city
+        VARCHAR w_state
+    }
+    MAIN_REASON {
+        BIGINT r_reason_sk PK
+        VARCHAR r_reason_id
+        VARCHAR r_reason_desc
+    }
+    MAIN_STORE_SALES {
+        INTEGER ss_sold_date_sk
+        INTEGER ss_sold_time_sk
+        INTEGER ss_item_sk
+        BIGINT ss_customer_sk
+        BIGINT ss_cdemo_sk
+        BIGINT ss_hdemo_sk
+        BIGINT ss_addr_sk
+        BIGINT ss_store_sk
+        BIGINT ss_promo_sk
+        BIGINT ss_ticket_number PK
+    }
+    MAIN_STORE_RETURNS {
+        INTEGER sr_returned_date_sk
+        INTEGER sr_item_sk
+        BIGINT sr_customer_sk
+        BIGINT sr_cdemo_sk
+        BIGINT sr_hdemo_sk
+        BIGINT sr_addr_sk
+        BIGINT sr_store_sk
+        BIGINT sr_reason_sk
+        BIGINT sr_ticket_number
+    }
+    MAIN_CATALOG_SALES {
+        INTEGER cs_sold_date_sk
+        INTEGER cs_ship_date_sk
+        BIGINT cs_bill_customer_sk
+        BIGINT cs_bill_cdemo_sk
+        BIGINT cs_bill_hdemo_sk
+        BIGINT cs_bill_addr_sk
+        BIGINT cs_ship_customer_sk
+        BIGINT cs_ship_cdemo_sk
+        BIGINT cs_ship_hdemo_sk
+        BIGINT cs_ship_addr_sk
+        BIGINT cs_item_sk
+        BIGINT cs_promo_sk
+        BIGINT cs_warehouse_sk
+        BIGINT cs_order_number PK
+    }
+    MAIN_WEB_SALES {
+        INTEGER ws_sold_date_sk
+        INTEGER ws_ship_date_sk
+        BIGINT ws_bill_customer_sk
+        BIGINT ws_bill_cdemo_sk
+        BIGINT ws_bill_hdemo_sk
+        BIGINT ws_bill_addr_sk
+        BIGINT ws_ship_customer_sk
+        BIGINT ws_ship_cdemo_sk
+        BIGINT ws_ship_hdemo_sk
+        BIGINT ws_ship_addr_sk
+        INTEGER ws_item_sk
+        BIGINT ws_promo_sk
+        BIGINT ws_warehouse_sk
+        BIGINT ws_order_number
+        INTEGER ws_line_number PK
+    }
+    MAIN_INVENTORY {
+        INTEGER inv_date_sk
+        INTEGER inv_item_sk
+        INTEGER inv_warehouse_sk
+        INTEGER inv_quantity_on_hand
+    }
+    LOGS_APP_EVENTS {
+        TIMESTAMP timestamp
+        VARCHAR event
+        VARCHAR session_id
+        BIGINT customer_sk
+        BIGINT item_sk
+        BIGINT quantity
+        VARCHAR order_id
+    }
+    LOGS_CS_TICKETS {
+        VARCHAR ticket_id PK
+        TIMESTAMP timestamp
+        VARCHAR category
+        BIGINT customer_sk
+        VARCHAR priority
+        BIGINT item_sk
+        BIGINT warehouse_sk
+    }
+    LOGS_CUSTOMER_SERVICE {
+        VARCHAR ticket_id PK
+        TIMESTAMP timestamp
+        VARCHAR category
+        BIGINT customer_sk
+        VARCHAR priority
+        BIGINT item_sk
+        BIGINT warehouse_sk
+        VARCHAR request_id
+        VARCHAR status
+        VARCHAR assigned_to
+        TIMESTAMP completed_date
+    }
+    LOGS_DELETION_REQUESTS {
+        VARCHAR request_id PK
+        TIMESTAMP timestamp
+        BIGINT customer_sk
+        VARCHAR status
+        TIMESTAMP completed_date
+    }
+    LOGS_EXPERIMENT_CONFIGS {
+        VARCHAR experiment_id PK
+        DATE start_date
+        DATE end_date
+        STRUCT target_split
+        VARCHAR primary_metric
+    }
+    LOGS_EXPERIMENT_ASSIGNMENTS {
+        TIMESTAMP timestamp
+        VARCHAR experiment_id
+        VARCHAR variant
+        VARCHAR session_id
+        BIGINT customer_sk
+        VARCHAR device_type
+    }
+    LOGS_EXPERIMENT_ASSIGNMENTS_BASE {
+        TIMESTAMP timestamp
+        VARCHAR experiment_id
+        VARCHAR variant
+        VARCHAR session_id
+        BIGINT customer_sk
+        VARCHAR device_type
+    }
+    LOGS_EXPERIMENT_ASSIGNMENTS_INTERACTION {
+        TIMESTAMP timestamp
+        VARCHAR experiment_id
+        VARCHAR variant
+        VARCHAR session_id
+        BIGINT customer_sk
+        VARCHAR device_type
+    }
+    LOGS_EXPERIMENT_ASSIGNMENTS_NOVELTY {
+        TIMESTAMP timestamp
+        VARCHAR experiment_id
+        VARCHAR variant
+        VARCHAR session_id
+        BIGINT customer_sk
+        VARCHAR device_type
+    }
+    LOGS_EXPERIMENT_ASSIGNMENTS_SUPPLEMENT {
+        TIMESTAMP timestamp
+        VARCHAR experiment_id
+        VARCHAR variant
+        VARCHAR session_id
+        BIGINT customer_sk
+        VARCHAR device_type
+    }
+    LOGS_EXPERIMENT_EVENTS {
+        TIMESTAMP timestamp
+        VARCHAR experiment_id
+        VARCHAR variant
+        VARCHAR session_id
+        VARCHAR event_type
+        DOUBLE revenue
+    }
+    LOGS_EXPERIMENT_EVENTS_BASE {
+        TIMESTAMP timestamp
+        VARCHAR experiment_id
+        VARCHAR variant
+        VARCHAR session_id
+        VARCHAR event_type
+        DOUBLE revenue
+    }
+    LOGS_EXPERIMENT_EVENTS_INTERACTION {
+        TIMESTAMP timestamp
+        VARCHAR experiment_id
+        VARCHAR variant
+        VARCHAR session_id
+        VARCHAR event_type
+        DOUBLE revenue
+    }
+    LOGS_EXPERIMENT_EVENTS_NOVELTY {
+        TIMESTAMP timestamp
+        VARCHAR experiment_id
+        VARCHAR variant
+        VARCHAR session_id
+        VARCHAR event_type
+        DOUBLE revenue
+    }
+    LOGS_EXPERIMENT_EVENTS_SUPPLEMENT {
+        TIMESTAMP timestamp
+        VARCHAR experiment_id
+        VARCHAR variant
+        VARCHAR session_id
+        VARCHAR event_type
+        DOUBLE revenue
+    }
+    LOGS_PAGE_PERFORMANCE {
+        TIMESTAMP timestamp
+        VARCHAR page_url
+        VARCHAR category
+        DOUBLE load_time_seconds
+        VARCHAR session_id
+        BOOLEAN converted
+    }
+    LOGS_PROMO_CODE_USAGE {
+        TIMESTAMP timestamp
+        VARCHAR event
+        VARCHAR promo_code
+        BIGINT customer_sk
+        VARCHAR order_id
+        BIGINT item_sk
+        DOUBLE original_price
+        DOUBLE discount_amount
+    }
+
+    MAIN_CUSTOMER_DEMOGRAPHICS ||--o{ MAIN_CUSTOMER : "c_current_cdemo_sk"
+    MAIN_HOUSEHOLD_DEMOGRAPHICS ||--o{ MAIN_CUSTOMER : "c_current_hdemo_sk"
+    MAIN_CUSTOMER_ADDRESS ||--o{ MAIN_CUSTOMER : "c_current_addr_sk"
+    MAIN_DATE_DIM ||--o{ MAIN_CUSTOMER : "c_first_shipto/sales_date_sk"
+    MAIN_INCOME_BAND ||--o{ MAIN_HOUSEHOLD_DEMOGRAPHICS : "hd_income_band_sk"
+
+    MAIN_DATE_DIM ||--o{ MAIN_STORE_SALES : "ss_sold_date_sk"
+    MAIN_ITEM ||--o{ MAIN_STORE_SALES : "ss_item_sk"
+    MAIN_CUSTOMER ||--o{ MAIN_STORE_SALES : "ss_customer_sk"
+    MAIN_CUSTOMER_DEMOGRAPHICS ||--o{ MAIN_STORE_SALES : "ss_cdemo_sk"
+    MAIN_HOUSEHOLD_DEMOGRAPHICS ||--o{ MAIN_STORE_SALES : "ss_hdemo_sk"
+    MAIN_CUSTOMER_ADDRESS ||--o{ MAIN_STORE_SALES : "ss_addr_sk"
+    MAIN_STORE ||--o{ MAIN_STORE_SALES : "ss_store_sk"
+    MAIN_PROMOTION ||--o{ MAIN_STORE_SALES : "ss_promo_sk"
+
+    MAIN_STORE_SALES ||--o{ MAIN_STORE_RETURNS : "sr_ticket_number"
+    MAIN_DATE_DIM ||--o{ MAIN_STORE_RETURNS : "sr_returned_date_sk"
+    MAIN_ITEM ||--o{ MAIN_STORE_RETURNS : "sr_item_sk"
+    MAIN_CUSTOMER ||--o{ MAIN_STORE_RETURNS : "sr_customer_sk"
+    MAIN_CUSTOMER_DEMOGRAPHICS ||--o{ MAIN_STORE_RETURNS : "sr_cdemo_sk"
+    MAIN_HOUSEHOLD_DEMOGRAPHICS ||--o{ MAIN_STORE_RETURNS : "sr_hdemo_sk"
+    MAIN_CUSTOMER_ADDRESS ||--o{ MAIN_STORE_RETURNS : "sr_addr_sk"
+    MAIN_STORE ||--o{ MAIN_STORE_RETURNS : "sr_store_sk"
+    MAIN_REASON ||--o{ MAIN_STORE_RETURNS : "sr_reason_sk"
+
+    MAIN_DATE_DIM ||--o{ MAIN_CATALOG_SALES : "cs_sold_date_sk"
+    MAIN_DATE_DIM ||--o{ MAIN_CATALOG_SALES : "cs_ship_date_sk"
+    MAIN_CUSTOMER ||--o{ MAIN_CATALOG_SALES : "cs_bill_customer_sk"
+    MAIN_CUSTOMER_DEMOGRAPHICS ||--o{ MAIN_CATALOG_SALES : "cs_bill_cdemo_sk"
+    MAIN_HOUSEHOLD_DEMOGRAPHICS ||--o{ MAIN_CATALOG_SALES : "cs_bill_hdemo_sk"
+    MAIN_CUSTOMER_ADDRESS ||--o{ MAIN_CATALOG_SALES : "cs_bill_addr_sk"
+    MAIN_CUSTOMER ||--o{ MAIN_CATALOG_SALES : "cs_ship_customer_sk"
+    MAIN_CUSTOMER_DEMOGRAPHICS ||--o{ MAIN_CATALOG_SALES : "cs_ship_cdemo_sk"
+    MAIN_HOUSEHOLD_DEMOGRAPHICS ||--o{ MAIN_CATALOG_SALES : "cs_ship_hdemo_sk"
+    MAIN_CUSTOMER_ADDRESS ||--o{ MAIN_CATALOG_SALES : "cs_ship_addr_sk"
+    MAIN_ITEM ||--o{ MAIN_CATALOG_SALES : "cs_item_sk"
+    MAIN_PROMOTION ||--o{ MAIN_CATALOG_SALES : "cs_promo_sk"
+    MAIN_WAREHOUSE ||--o{ MAIN_CATALOG_SALES : "cs_warehouse_sk"
+
+    MAIN_DATE_DIM ||--o{ MAIN_WEB_SALES : "ws_sold_date_sk"
+    MAIN_DATE_DIM ||--o{ MAIN_WEB_SALES : "ws_ship_date_sk"
+    MAIN_CUSTOMER ||--o{ MAIN_WEB_SALES : "ws_bill_customer_sk"
+    MAIN_CUSTOMER_DEMOGRAPHICS ||--o{ MAIN_WEB_SALES : "ws_bill_cdemo_sk"
+    MAIN_HOUSEHOLD_DEMOGRAPHICS ||--o{ MAIN_WEB_SALES : "ws_bill_hdemo_sk"
+    MAIN_CUSTOMER_ADDRESS ||--o{ MAIN_WEB_SALES : "ws_bill_addr_sk"
+    MAIN_CUSTOMER ||--o{ MAIN_WEB_SALES : "ws_ship_customer_sk"
+    MAIN_CUSTOMER_DEMOGRAPHICS ||--o{ MAIN_WEB_SALES : "ws_ship_cdemo_sk"
+    MAIN_HOUSEHOLD_DEMOGRAPHICS ||--o{ MAIN_WEB_SALES : "ws_ship_hdemo_sk"
+    MAIN_CUSTOMER_ADDRESS ||--o{ MAIN_WEB_SALES : "ws_ship_addr_sk"
+    MAIN_ITEM ||--o{ MAIN_WEB_SALES : "ws_item_sk"
+    MAIN_PROMOTION ||--o{ MAIN_WEB_SALES : "ws_promo_sk"
+    MAIN_WAREHOUSE ||--o{ MAIN_WEB_SALES : "ws_warehouse_sk"
+
+    MAIN_DATE_DIM ||--o{ MAIN_INVENTORY : "inv_date_sk"
+    MAIN_ITEM ||--o{ MAIN_INVENTORY : "inv_item_sk"
+    MAIN_WAREHOUSE ||--o{ MAIN_INVENTORY : "inv_warehouse_sk"
+
+    MAIN_DATE_DIM ||--o{ MAIN_PROMOTION : "p_start_date_sk"
+    MAIN_DATE_DIM ||--o{ MAIN_PROMOTION : "p_end_date_sk"
+    MAIN_ITEM ||--o{ MAIN_PROMOTION : "p_item_sk"
+
+    MAIN_CUSTOMER ||--o{ LOGS_APP_EVENTS : "customer_sk"
+    MAIN_ITEM ||--o{ LOGS_APP_EVENTS : "item_sk"
+
+    MAIN_CUSTOMER ||--o{ LOGS_CS_TICKETS : "customer_sk"
+    MAIN_ITEM ||--o{ LOGS_CS_TICKETS : "item_sk"
+    MAIN_WAREHOUSE ||--o{ LOGS_CS_TICKETS : "warehouse_sk"
+
+    LOGS_CS_TICKETS ||--|| LOGS_CUSTOMER_SERVICE : "ticket_id"
+    MAIN_CUSTOMER ||--o{ LOGS_CUSTOMER_SERVICE : "customer_sk"
+    MAIN_ITEM ||--o{ LOGS_CUSTOMER_SERVICE : "item_sk"
+    MAIN_WAREHOUSE ||--o{ LOGS_CUSTOMER_SERVICE : "warehouse_sk"
+
+    MAIN_CUSTOMER ||--o{ LOGS_DELETION_REQUESTS : "customer_sk"
+
+    LOGS_EXPERIMENT_CONFIGS ||--o{ LOGS_EXPERIMENT_ASSIGNMENTS : "experiment_id"
+    LOGS_EXPERIMENT_CONFIGS ||--o{ LOGS_EXPERIMENT_ASSIGNMENTS_BASE : "experiment_id"
+    LOGS_EXPERIMENT_CONFIGS ||--o{ LOGS_EXPERIMENT_ASSIGNMENTS_INTERACTION : "experiment_id"
+    LOGS_EXPERIMENT_CONFIGS ||--o{ LOGS_EXPERIMENT_ASSIGNMENTS_NOVELTY : "experiment_id"
+    LOGS_EXPERIMENT_CONFIGS ||--o{ LOGS_EXPERIMENT_ASSIGNMENTS_SUPPLEMENT : "experiment_id"
+    LOGS_EXPERIMENT_CONFIGS ||--o{ LOGS_EXPERIMENT_EVENTS : "experiment_id"
+    LOGS_EXPERIMENT_CONFIGS ||--o{ LOGS_EXPERIMENT_EVENTS_BASE : "experiment_id"
+    LOGS_EXPERIMENT_CONFIGS ||--o{ LOGS_EXPERIMENT_EVENTS_INTERACTION : "experiment_id"
+    LOGS_EXPERIMENT_CONFIGS ||--o{ LOGS_EXPERIMENT_EVENTS_NOVELTY : "experiment_id"
+    LOGS_EXPERIMENT_CONFIGS ||--o{ LOGS_EXPERIMENT_EVENTS_SUPPLEMENT : "experiment_id"
+
+    MAIN_CUSTOMER ||--o{ LOGS_EXPERIMENT_ASSIGNMENTS : "customer_sk"
+    MAIN_CUSTOMER ||--o{ LOGS_EXPERIMENT_ASSIGNMENTS_BASE : "customer_sk"
+    MAIN_CUSTOMER ||--o{ LOGS_EXPERIMENT_ASSIGNMENTS_INTERACTION : "customer_sk"
+    MAIN_CUSTOMER ||--o{ LOGS_EXPERIMENT_ASSIGNMENTS_NOVELTY : "customer_sk"
+    MAIN_CUSTOMER ||--o{ LOGS_EXPERIMENT_ASSIGNMENTS_SUPPLEMENT : "customer_sk"
+
+    MAIN_CUSTOMER ||--o{ LOGS_PROMO_CODE_USAGE : "customer_sk"
+    MAIN_ITEM ||--o{ LOGS_PROMO_CODE_USAGE : "item_sk"

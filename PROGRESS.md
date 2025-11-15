@@ -1,0 +1,1 @@
+2025-11-15 12:55 PST - Authored a comprehensive Mermaid ER diagram (diagrams/antm_erd.mmd) plus rendered PDF covering all 33 retail + log tables, and set up a local mermaid-cli toolchain for reproducible diagram builds.

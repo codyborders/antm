@@ -5,7 +5,8 @@
 
 Build systems that can extract, transform, and reason over complex retail data.
 
-**Competition Platform:** [hack.theoryvc.com](https://hack.theoryvc.com)
+> **All official questions, submissions, and leaderboard access live at [hack.theoryvc.com](https://hack.theoryvc.com).**
+>
 
 ---
 
@@ -22,6 +23,7 @@ You'll work with:
 
 **Your goal:** Answer business questions accurately and efficiently. Use whatever approach works.
 
+**Competition Platform:** [hack.theoryvc.com](https://hack.theoryvc.com)
 ---
 
 ## Quick Start
@@ -104,6 +106,8 @@ Contestants have access to a pre-configured **MCP (Model Context Protocol) serve
 - List all tables in the database
 - Access DuckDB SQL syntax reference
 - Read-only access with query timeouts and result limits
+
+> ✅ **Next step:** Head back to [hack.theoryvc.com](https://hack.theoryvc.com) for the live question set, submission portal, and leaderboard. This repo just gives you the local tooling—the competition itself runs entirely on the platform.
 
 ---
 

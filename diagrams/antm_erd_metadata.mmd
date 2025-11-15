@@ -1,0 +1,49 @@
+erDiagram
+    SYSTEM_DATABASES {
+        UUID uuid PK
+        VARCHAR name
+        TIMESTAMPTZ created_ts
+        VARCHAR type
+    }
+    SYSTEM_DATABASE_SNAPSHOTS {
+        UUID database_id
+        UUID snapshot_id PK
+        VARCHAR snapshot_name
+        TIMESTAMP created_ts
+    }
+    SYSTEM_STORAGE_INFO {
+        UUID database_id
+        VARCHAR database_name
+        TIMESTAMP created_ts
+        BIGINT active_bytes
+    }
+    SYSTEM_STORAGE_INFO_HISTORY {
+        UUID database_id
+        VARCHAR database_name
+        TIMESTAMP created_ts
+        BIGINT active_bytes
+    }
+    SYSTEM_QUERY_HISTORY {
+        UUID query_id PK
+        VARCHAR query_text
+        TIMESTAMPTZ start_time
+        TIMESTAMPTZ end_time
+        UUID duckdb_id
+    }
+    SYSTEM_OWNED_SHARES {
+        VARCHAR name
+        UUID source_db_uuid
+        VARCHAR access
+    }
+    SYSTEM_SHARED_WITH_ME {
+        VARCHAR name
+        VARCHAR owner
+        TIMESTAMPTZ created_ts
+    }
+
+    SYSTEM_DATABASES ||--o{ SYSTEM_DATABASE_SNAPSHOTS : "database_id"
+    SYSTEM_DATABASES ||--o{ SYSTEM_STORAGE_INFO : "database_id"
+    SYSTEM_DATABASES ||--o{ SYSTEM_STORAGE_INFO_HISTORY : "database_id"
+    SYSTEM_DATABASES ||--o{ SYSTEM_OWNED_SHARES : "source_db_uuid"
+    SYSTEM_DATABASES ||--o{ SYSTEM_QUERY_HISTORY : "duckdb_id"
+    SYSTEM_DATABASES ||--o{ SYSTEM_SHARED_WITH_ME : "name"

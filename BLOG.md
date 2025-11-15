@@ -47,3 +47,16 @@ FROM dec_revenue;
 ```
 
 From there the rest of the calculations were straightforward ratio math, and I wrapped up by logging progress + preparing for the next batch of validation tasks.
+
+## 2025-11-15 – Breaking the Diagram into Slices
+After trying to read the all-in-one ERD in reviews, I decomposed it into four Mermaid specs/PDFs: a high-level bridge view, a retail core star schema, all experimentation/logs, and the DuckDB metadata tables. That separation mirrors how analysts actually attack questions—fact hunters stay inside their slice, and only hop to another chart when bridging dimensions like `customer_sk`.
+
+Each file now lives under `diagrams/` with a README explaining when to grab which artifact. Rendering is still handled by the local `@mermaid-js/mermaid-cli` install, but the subgraphs mean the PDFs render much faster and remain legible even when printed. Here’s the trimmed overview snippet:
+
+```mermaid
+erDiagram
+    MAIN_CUSTOMER ||--o{ MAIN_STORE_SALES : "ss_customer_sk"
+    MAIN_CUSTOMER ||--o{ LOGS_APP_EVENTS : "customer_sk"
+```
+
+The next step will be wiring these slices directly into analytics docs so questions like “Why did catalog sales drop?” link straight to the relevant chart.

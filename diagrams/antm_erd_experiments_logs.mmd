@@ -1,0 +1,188 @@
+erDiagram
+    MAIN_CUSTOMER {
+        BIGINT c_customer_sk PK
+        VARCHAR c_email_address
+    }
+    MAIN_ITEM {
+        BIGINT i_item_sk PK
+        VARCHAR i_item_id
+    }
+    LOGS_APP_EVENTS {
+        TIMESTAMP timestamp
+        VARCHAR event
+        VARCHAR session_id PK
+        BIGINT customer_sk
+        BIGINT item_sk
+        BIGINT quantity
+    }
+    LOGS_PAGE_PERFORMANCE {
+        TIMESTAMP timestamp
+        VARCHAR page_url
+        DOUBLE load_time_seconds
+        VARCHAR session_id
+        BOOLEAN converted
+    }
+    LOGS_PROMO_CODE_USAGE {
+        TIMESTAMP timestamp
+        VARCHAR promo_code
+        BIGINT customer_sk
+        BIGINT item_sk
+        DOUBLE discount_amount
+    }
+    LOGS_CS_TICKETS {
+        VARCHAR ticket_id PK
+        TIMESTAMP timestamp
+        BIGINT customer_sk
+        BIGINT item_sk
+        BIGINT warehouse_sk
+        VARCHAR priority
+    }
+    LOGS_CUSTOMER_SERVICE {
+        VARCHAR ticket_id PK
+        TIMESTAMP timestamp
+        BIGINT customer_sk
+        BIGINT item_sk
+        BIGINT warehouse_sk
+        VARCHAR status
+        TIMESTAMP completed_date
+    }
+    LOGS_DELETION_REQUESTS {
+        VARCHAR request_id PK
+        TIMESTAMP timestamp
+        BIGINT customer_sk
+        VARCHAR status
+        TIMESTAMP completed_date
+    }
+    MAIN_WAREHOUSE {
+        BIGINT w_warehouse_sk PK
+        VARCHAR w_state
+    }
+    LOGS_EXPERIMENT_CONFIGS {
+        VARCHAR experiment_id PK
+        DATE start_date
+        DATE end_date
+        STRUCT target_split
+        VARCHAR primary_metric
+    }
+    LOGS_EXPERIMENT_ASSIGNMENTS {
+        TIMESTAMP timestamp
+        VARCHAR experiment_id
+        VARCHAR variant
+        VARCHAR session_id
+        BIGINT customer_sk
+        VARCHAR device_type
+    }
+    LOGS_EXPERIMENT_ASSIGNMENTS_BASE {
+        TIMESTAMP timestamp
+        VARCHAR experiment_id
+        VARCHAR variant
+        VARCHAR session_id
+        BIGINT customer_sk
+    }
+    LOGS_EXPERIMENT_ASSIGNMENTS_INTERACTION {
+        TIMESTAMP timestamp
+        VARCHAR experiment_id
+        VARCHAR variant
+        VARCHAR session_id
+        BIGINT customer_sk
+    }
+    LOGS_EXPERIMENT_ASSIGNMENTS_NOVELTY {
+        TIMESTAMP timestamp
+        VARCHAR experiment_id
+        VARCHAR variant
+        VARCHAR session_id
+        BIGINT customer_sk
+    }
+    LOGS_EXPERIMENT_ASSIGNMENTS_SUPPLEMENT {
+        TIMESTAMP timestamp
+        VARCHAR experiment_id
+        VARCHAR variant
+        VARCHAR session_id
+        BIGINT customer_sk
+    }
+    LOGS_EXPERIMENT_EVENTS {
+        TIMESTAMP timestamp
+        VARCHAR experiment_id
+        VARCHAR variant
+        VARCHAR session_id
+        VARCHAR event_type
+        DOUBLE revenue
+    }
+    LOGS_EXPERIMENT_EVENTS_BASE {
+        TIMESTAMP timestamp
+        VARCHAR experiment_id
+        VARCHAR variant
+        VARCHAR session_id
+        VARCHAR event_type
+        DOUBLE revenue
+    }
+    LOGS_EXPERIMENT_EVENTS_INTERACTION {
+        TIMESTAMP timestamp
+        VARCHAR experiment_id
+        VARCHAR variant
+        VARCHAR session_id
+        VARCHAR event_type
+        DOUBLE revenue
+    }
+    LOGS_EXPERIMENT_EVENTS_NOVELTY {
+        TIMESTAMP timestamp
+        VARCHAR experiment_id
+        VARCHAR variant
+        VARCHAR session_id
+        VARCHAR event_type
+        DOUBLE revenue
+    }
+    LOGS_EXPERIMENT_EVENTS_SUPPLEMENT {
+        TIMESTAMP timestamp
+        VARCHAR experiment_id
+        VARCHAR variant
+        VARCHAR session_id
+        VARCHAR event_type
+        DOUBLE revenue
+    }
+
+    MAIN_CUSTOMER ||--o{ LOGS_APP_EVENTS : "customer_sk"
+    MAIN_ITEM ||--o{ LOGS_APP_EVENTS : "item_sk"
+    LOGS_APP_EVENTS ||--o{ LOGS_PAGE_PERFORMANCE : "session_id"
+    MAIN_CUSTOMER ||--o{ LOGS_PROMO_CODE_USAGE : "customer_sk"
+    MAIN_ITEM ||--o{ LOGS_PROMO_CODE_USAGE : "item_sk"
+
+    MAIN_CUSTOMER ||--o{ LOGS_CS_TICKETS : "customer_sk"
+    MAIN_ITEM ||--o{ LOGS_CS_TICKETS : "item_sk"
+    MAIN_WAREHOUSE ||--o{ LOGS_CS_TICKETS : "warehouse_sk"
+    LOGS_CS_TICKETS ||--|| LOGS_CUSTOMER_SERVICE : "ticket_id"
+    MAIN_CUSTOMER ||--o{ LOGS_CUSTOMER_SERVICE : "customer_sk"
+    MAIN_ITEM ||--o{ LOGS_CUSTOMER_SERVICE : "item_sk"
+    MAIN_WAREHOUSE ||--o{ LOGS_CUSTOMER_SERVICE : "warehouse_sk"
+
+    MAIN_CUSTOMER ||--o{ LOGS_DELETION_REQUESTS : "customer_sk"
+
+    LOGS_EXPERIMENT_CONFIGS ||--o{ LOGS_EXPERIMENT_ASSIGNMENTS : "experiment_id"
+    LOGS_EXPERIMENT_CONFIGS ||--o{ LOGS_EXPERIMENT_ASSIGNMENTS_BASE : "experiment_id"
+    LOGS_EXPERIMENT_CONFIGS ||--o{ LOGS_EXPERIMENT_ASSIGNMENTS_INTERACTION : "experiment_id"
+    LOGS_EXPERIMENT_CONFIGS ||--o{ LOGS_EXPERIMENT_ASSIGNMENTS_NOVELTY : "experiment_id"
+    LOGS_EXPERIMENT_CONFIGS ||--o{ LOGS_EXPERIMENT_ASSIGNMENTS_SUPPLEMENT : "experiment_id"
+
+    LOGS_EXPERIMENT_CONFIGS ||--o{ LOGS_EXPERIMENT_EVENTS : "experiment_id"
+    LOGS_EXPERIMENT_CONFIGS ||--o{ LOGS_EXPERIMENT_EVENTS_BASE : "experiment_id"
+    LOGS_EXPERIMENT_CONFIGS ||--o{ LOGS_EXPERIMENT_EVENTS_INTERACTION : "experiment_id"
+    LOGS_EXPERIMENT_CONFIGS ||--o{ LOGS_EXPERIMENT_EVENTS_NOVELTY : "experiment_id"
+    LOGS_EXPERIMENT_CONFIGS ||--o{ LOGS_EXPERIMENT_EVENTS_SUPPLEMENT : "experiment_id"
+
+    LOGS_APP_EVENTS ||--o{ LOGS_EXPERIMENT_ASSIGNMENTS : "session_id"
+    LOGS_APP_EVENTS ||--o{ LOGS_EXPERIMENT_ASSIGNMENTS_BASE : "session_id"
+    LOGS_APP_EVENTS ||--o{ LOGS_EXPERIMENT_ASSIGNMENTS_INTERACTION : "session_id"
+    LOGS_APP_EVENTS ||--o{ LOGS_EXPERIMENT_ASSIGNMENTS_NOVELTY : "session_id"
+    LOGS_APP_EVENTS ||--o{ LOGS_EXPERIMENT_ASSIGNMENTS_SUPPLEMENT : "session_id"
+
+    LOGS_APP_EVENTS ||--o{ LOGS_EXPERIMENT_EVENTS : "session_id"
+    LOGS_APP_EVENTS ||--o{ LOGS_EXPERIMENT_EVENTS_BASE : "session_id"
+    LOGS_APP_EVENTS ||--o{ LOGS_EXPERIMENT_EVENTS_INTERACTION : "session_id"
+    LOGS_APP_EVENTS ||--o{ LOGS_EXPERIMENT_EVENTS_NOVELTY : "session_id"
+    LOGS_APP_EVENTS ||--o{ LOGS_EXPERIMENT_EVENTS_SUPPLEMENT : "session_id"
+
+    MAIN_CUSTOMER ||--o{ LOGS_EXPERIMENT_ASSIGNMENTS : "customer_sk"
+    MAIN_CUSTOMER ||--o{ LOGS_EXPERIMENT_ASSIGNMENTS_BASE : "customer_sk"
+    MAIN_CUSTOMER ||--o{ LOGS_EXPERIMENT_ASSIGNMENTS_INTERACTION : "customer_sk"
+    MAIN_CUSTOMER ||--o{ LOGS_EXPERIMENT_ASSIGNMENTS_NOVELTY : "customer_sk"
+    MAIN_CUSTOMER ||--o{ LOGS_EXPERIMENT_ASSIGNMENTS_SUPPLEMENT : "customer_sk"

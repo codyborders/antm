@@ -6,7 +6,8 @@
 Build systems that can extract, transform, and reason over complex retail data.
 
 > **All official questions, submissions, and leaderboard access live at [hack.theoryvc.com](https://hack.theoryvc.com).**
->
+> ⚠️ **You must sign in with the exact email you used to register via Luma—other accounts will not be recognized.**
+
 
 ---
 

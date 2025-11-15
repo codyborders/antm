@@ -159,7 +159,7 @@ modeler-hackathon-starter/
 Submissions must follow the leaderboard schema:
 
 ```csv
-index,a1,a2,a3,a4,a5
+row_index,col_1,col_2,col_3,col_4,col_5
 0,9104725,TRUE,42.1875,vpm2k6zqf,Avery
 ```
 
